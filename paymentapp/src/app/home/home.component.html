@@ -1,4 +1,4 @@
 <p>
   home works!
 </p>
-<a routerLink="shippingcart">Auto direct to Shipping Cart</a>
+<a [routerLink]="['shippingcart',888,'jack']" [queryParams]="{page:1,order:'newest'}">Auto direct to Shipping Cart</a>

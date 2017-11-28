@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit , OnDestroy {
   listenRFID() {
     console.log('HomeComponent call backend...' + (this.index++));
     if ( this.index === 10 ) {
-      this.router.navigate(['shippingcart']);
+      this.router.navigate(['shippingcart',999,'bb'],{
+        queryParams : {page : 1,order : 'newest'}
+      });
     }
   }
 

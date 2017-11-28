@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest'
+
 
 @Component({
   selector: 'app-shippingcart',
@@ -20,7 +23,30 @@ export class ShippingcartComponent implements OnInit , OnDestroy {
     }
   }
   ngOnInit() {
+
+    console.log('ShippingcartComponent Oninit...');
+
     this.interval = setInterval( () => { this.listenRFID(); }, 1000);
+
+    /*
+    this.route.paramMap.subscribe(params => {
+    });
+    this.route.snapshot.paramMap.get('id');
+    this.route.queryParamMap.subscribe(params => {
+    });
+    this.route.snapshot.queryParamMap.get('page');
+    */
+
+    Observable.combineLatest([
+      this.route.paramMap,
+      this.route.queryParamMap
+    ]).subscribe(combined => {
+      let id = combined[0].get('id');
+      let page = combined[1].get('page');
+      console.log('id : '+ id +' page : '+page);
+    });
+
+
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);

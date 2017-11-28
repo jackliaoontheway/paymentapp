@@ -27,7 +27,7 @@ import { ShippingcartComponent } from './shippingcart/shippingcart.component';
         component : HomeComponent
       },
       {
-        path : 'shippingcart',
+        path : 'shippingcart/:id/:name',
         component : ShippingcartComponent
       },
       {
