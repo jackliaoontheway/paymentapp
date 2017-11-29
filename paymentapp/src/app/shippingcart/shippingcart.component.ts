@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Http } from '@angular/http';
 import { Router , ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest'
@@ -11,13 +12,19 @@ import 'rxjs/add/observable/combineLatest'
 })
 export class ShippingcartComponent implements OnInit , OnDestroy {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute,private http : Http) { }
 
   private interval = null;
   private index = 1;
 
   listenRFID() {
     console.log('ShippingcartComponent call backend...' + this.index ++);
+
+    this.http.get('http://localhost:8080/refreshItems')
+    .subscribe(response => {
+      console.log(response.json())
+    });
+
     if ( this.index === 10 ) {
       clearInterval(this.interval);
     }
