@@ -42,7 +42,6 @@ import { ShippingcartComponent } from './shippingcart/shippingcart.component';
     ])
   ],
   providers: [
-    
   ],
   bootstrap: [AppComponent]
 })

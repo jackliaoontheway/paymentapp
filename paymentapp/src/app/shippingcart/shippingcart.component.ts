@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router , ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest'
+import 'rxjs/add/observable/combineLatest';
 
 
 @Component({
@@ -12,7 +12,7 @@ import 'rxjs/add/observable/combineLatest'
 })
 export class ShippingcartComponent implements OnInit , OnDestroy {
 
-  constructor(private router: Router, private route: ActivatedRoute,private http : Http) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: Http) { }
 
   private interval = null;
   private index = 1;
@@ -20,9 +20,9 @@ export class ShippingcartComponent implements OnInit , OnDestroy {
   listenRFID() {
     console.log('ShippingcartComponent call backend...' + this.index ++);
 
-    this.http.get('http://localhost:8080/refreshItems')
+    this.http.get('http://localhost:8080/hello')
     .subscribe(response => {
-      console.log(response.json())
+      console.log(response.text());
     });
 
     if ( this.index === 10 ) {
@@ -44,6 +44,7 @@ export class ShippingcartComponent implements OnInit , OnDestroy {
     this.route.snapshot.queryParamMap.get('page');
     */
 
+    /*
     Observable.combineLatest([
       this.route.paramMap,
       this.route.queryParamMap
@@ -52,7 +53,7 @@ export class ShippingcartComponent implements OnInit , OnDestroy {
       let page = combined[1].get('page');
       console.log('id : '+ id +' page : '+page);
     });
-
+    */
 
   }
   ngOnDestroy(): void {
