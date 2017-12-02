@@ -4,13 +4,12 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
-
 @Component({
-  selector: 'app-shippingcart',
-  templateUrl: './shippingcart.component.html',
-  styleUrls: ['./shippingcart.component.css']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class ShippingcartComponent implements OnInit , OnDestroy {
+export class CartComponent implements OnInit , OnDestroy {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: Http) { }
 
@@ -18,20 +17,20 @@ export class ShippingcartComponent implements OnInit , OnDestroy {
   private index = 1;
 
   listenRFID() {
-    console.log('ShippingcartComponent call backend...' + this.index ++);
+    console.log('CartComponent call backend...' + this.index ++);
 
     this.http.get('http://localhost:8080/hello')
     .subscribe(response => {
       console.log(response.text());
     });
 
-    if ( this.index === 10 ) {
-      clearInterval(this.interval);
+    if ( this.index === 3 ) {
+      this.router.navigate(['pay']);
     }
   }
   ngOnInit() {
 
-    console.log('ShippingcartComponent Oninit...');
+    console.log('CartComponent Oninit...');
 
     this.interval = setInterval( () => { this.listenRFID(); }, 1000);
 

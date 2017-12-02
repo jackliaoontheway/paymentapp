@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pay',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PayComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    setTimeout( () => { this.router.navigate(['checkout']); }, 3000);
   }
 
 }

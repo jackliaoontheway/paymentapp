@@ -4,20 +4,17 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { OrderComponent } from './order/order.component';
 import { PayComponent } from './pay/pay.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ShippingcartComponent } from './shippingcart/shippingcart.component';
-
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    OrderComponent,
     PayComponent,
     CheckoutComponent,
-    ShippingcartComponent
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +25,8 @@ import { ShippingcartComponent } from './shippingcart/shippingcart.component';
         component : HomeComponent
       },
       {
-        path : 'shippingcart/:id/:name',
-        component : ShippingcartComponent
+        path : 'cart/:id/:name',
+        component : CartComponent
       },
       {
         path : 'pay',

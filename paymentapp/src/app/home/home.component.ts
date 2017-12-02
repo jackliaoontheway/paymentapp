@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,8 +17,8 @@ export class HomeComponent implements OnInit , OnDestroy {
 
   listenRFID() {
     console.log('HomeComponent call backend...' + (this.index++));
-    if ( this.index === 10 ) {
-      this.router.navigate(['shippingcart', 999, 'bb'], {
+    if ( this.index === 3 ) {
+      this.router.navigate(['cart', 999, 'bb'], {
         queryParams : {page : 1, order : 'newest'}
       });
     }
