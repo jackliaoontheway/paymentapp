@@ -36,10 +36,10 @@
 
 <div class="cart-foot-div"> 
     <div class="cart-total-div"> 
-        <span class="cart-total-span">合计 ￥ {{totalFee}}</span>
+        <span class="cart-total-span">合计 ￥<span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;{{totalFee}}</span></span>
     </div>
     <div class="cart-submit-div"> 
-         <span class="cart-submit-span">请核实订单&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button class="cart-submit-a">&nbsp;结&nbsp;算&nbsp;</button></span>
+         <span class="cart-submit-span">请核实订单&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button class="cart-submit-a" (click)="submit()">&nbsp;结&nbsp;算&nbsp;</button></span>
     </div>
 <img src="assets/images/foot.png" class="cart-foot-img"/>
 </div>

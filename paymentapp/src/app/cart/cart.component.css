@@ -31,7 +31,7 @@
 .cart-foot-div{
     position: fixed;
     bottom: 0px;
-    height: 268px;
+    height: 258px;
     width: 100%;
 }
 
@@ -50,8 +50,8 @@
 }
 .cart-total-span {
     text-align: right;
-    padding : 8px;
-    margin-right : 20%;
+    padding : 9px;
+    margin-right : 13%;
     display:block;
     font-size : 22px;
     color:  rgb(190, 184, 184);
@@ -60,7 +60,7 @@
 
 .cart-submit-div {
     background-image: url('../../assets/images/submit_background.png');
-    margin-top : 40px;
+    margin-top : 30px;
     margin-bottom : 10px;
     height: 80px;
     width: 100%;
