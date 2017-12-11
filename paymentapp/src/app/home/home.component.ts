@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
+import { PaymentService } from '../services/payment.service';
+import { OrderItem } from '../model/OrderItem';
 
 @Component({
   selector: 'app-home',
@@ -8,24 +10,24 @@ import { Router , ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit , OnDestroy {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private paymentService: PaymentService) { }
 
   private interval = null;
 
-  private index = 1;
-
-
   listenRFID() {
-    console.log('HomeComponent call backend...' + (this.index++));
-    if ( this.index === 3 ) {
-      this.router.navigate(['cart', 999, 'bb'], {
-        queryParams : {page : 1, order : 'newest'}
-      });
-    }
+    console.log('read rfid...');
+    this.paymentService.readRFID().subscribe((response) => {
+      const hasData = JSON.parse(JSON.stringify(response)).hasData;
+      if (hasData) {
+        this.router.navigate(['cart'], {
+          queryParams : {serverResponse : JSON.stringify(response)}
+        });
+      }
+    });
   }
 
   ngOnInit() {
-    this.interval = setInterval( () => { this.listenRFID(); }, 1000);
+    this.interval = setInterval( () => { this.listenRFID(); }, 3000);
   }
 
   ngOnDestroy(): void {

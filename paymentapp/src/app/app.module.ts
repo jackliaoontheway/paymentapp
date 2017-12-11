@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PayComponent } from './pay/pay.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import { CommonModule } from '@angular/common';
+import { PaymentService } from './services/payment.service';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,14 +22,17 @@ import { CartComponent } from './cart/cart.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    CommonModule,
+    HttpClientModule,
+    MatTableModule,
+    MatButtonModule,
     RouterModule.forRoot([
       {
         path : '',
         component : HomeComponent
       },
       {
-        path : 'cart/:id/:name',
+        path : 'cart',
         component : CartComponent
       },
       {
@@ -39,6 +46,7 @@ import { CartComponent } from './cart/cart.component';
     ])
   ],
   providers: [
+    PaymentService
   ],
   bootstrap: [AppComponent]
 })

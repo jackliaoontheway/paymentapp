@@ -1,1 +1,45 @@
-<img src="assets/images/cart.jpg" class="cart-bg"/>
+<div class="cart-head-div">
+    <img src="assets/images/head.png" class="cart-head-img"/>
+</div>
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef > <span class="cart-table-title">商品名称</span> </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="cart-table-title">{{element.name}}</span> </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="qty">
+        <mat-header-cell *matHeaderCellDef> <span class="cart-table-title">数量 (个) </span></mat-header-cell>
+        <mat-cell *matCellDef="let element"><span class="cart-table-title"> {{element.qty}}</span> </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> <span class="cart-table-title">单价 (元)</span> </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="cart-table-title">{{element.price}}</span> </mat-cell>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="itemFee">
+        <mat-header-cell *matHeaderCellDef> <span class="cart-table-title">金额 (元)</span> </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="cart-table-title">{{element.itemFee}} </span></mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+
+<div class="cart-foot-div"> 
+    <div class="cart-total-div"> 
+        <span class="cart-total-span">合计 ￥ {{totalFee}}</span>
+    </div>
+    <div class="cart-submit-div"> 
+         <span class="cart-submit-span">请核实订单&nbsp;&nbsp;&nbsp;&nbsp;<button mat-raised-button class="cart-submit-a">&nbsp;结&nbsp;算&nbsp;</button></span>
+    </div>
+<img src="assets/images/foot.png" class="cart-foot-img"/>
+</div>
