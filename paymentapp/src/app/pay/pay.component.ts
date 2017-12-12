@@ -3,6 +3,7 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { NooneOrder } from '../model/NooneOrder';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-pay',
@@ -11,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class PayComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private paymentService: PaymentService) { }
 
   order: NooneOrder = new NooneOrder();
 
@@ -39,7 +40,15 @@ export class PayComponent implements OnInit {
   onValueChange(payCode) {
     this.order.payCode = payCode;
     if (this.order.payCode.length === 18) {
+      this.paymentService.pay(this.order).subscribe((response) => {
+        const order = JSON.parse(JSON.stringify(response)).data;
+        if (order.status === 'SUCCESS') {
+          this.router.navigate(['checkout']);
+        }
+        if (order.status === 'NOTPAY') {
 
+        }
+      });
     }
   }
 
