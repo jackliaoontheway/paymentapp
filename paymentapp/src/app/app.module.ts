@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
 import { PaymentService } from './services/payment.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,14 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     CommonModule,
     HttpClientModule,
     MatTableModule,
     MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {
         path : '',
@@ -36,7 +43,7 @@ import {MatButtonModule} from '@angular/material/button';
         component : CartComponent
       },
       {
-        path : 'pay',
+        path : 'pay/:id',
         component : PayComponent
       },
       {

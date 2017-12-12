@@ -42,6 +42,11 @@ export class CartComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
+
+    this.orderItemList = null;
+    this.totalFee = 0;
+    this.dataSource.data = null;
+
     console.log('on init...');
     Observable.combineLatest([
       this.route.paramMap,
@@ -63,7 +68,12 @@ export class CartComponent implements OnInit , OnDestroy {
   }
 
   submit() {
-
+    this.paymentService.createOrder(this.orderItemList, this.totalFee).subscribe((response) => {
+      const order = JSON.parse(JSON.stringify(response)).data;
+      if (order) {
+        this.router.navigate(['pay', order.id]);
+      }
+    });
   }
 
 }

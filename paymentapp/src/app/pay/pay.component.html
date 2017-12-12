@@ -1,1 +1,9 @@
-<img src="assets/images/pay.jpg" class="pay-bg"/>
+<div class="pay-div" (click)="payDivOnClick()"> 
+    <div class="auth-code-div-forhidden" >
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input matInput type="password" (ngModelChange)="onValueChange($event)" autofocus="autofocus" #authCodeInput  [(ngModel)]="order.payCode"name="authCode">
+            </mat-form-field>
+        </form>
+    </div>
+</div>
