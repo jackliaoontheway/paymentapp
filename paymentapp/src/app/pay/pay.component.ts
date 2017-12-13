@@ -20,7 +20,7 @@ export class PayComponent implements OnInit {
 
   ngOnInit() {
     console.log('on init...');
-    this.order.payCode = null;
+    this.input.nativeElement.value = '';
     this.input.nativeElement.focus();
 
     Observable.combineLatest([
@@ -37,18 +37,48 @@ export class PayComponent implements OnInit {
     this.input.nativeElement.focus();
   }
 
-  onValueChange(payCode) {
-    this.order.payCode = payCode;
-    if (this.order.payCode.length === 18) {
-      this.paymentService.pay(this.order).subscribe((response) => {
-        const order = JSON.parse(JSON.stringify(response)).data;
-        if (order.status === 'SUCCESS') {
-          this.router.navigate(['checkout']);
-        }
-        if (order.status === 'NOTPAY') {
+  onValueChange(authCode) {
+    console.log(authCode);
+    if (authCode.length === 18) {
+      this.order.payCode = authCode;
+      this.pay();
+    }
+  }
 
-        }
-      });
+  pay () {
+    this.paymentService.pay(this.order).subscribe((response) => {
+      this.input.nativeElement.value = '';
+      const orderResp = JSON.parse(JSON.stringify(response)).data;
+      this.processStatus(orderResp.status);
+    });
+  }
+
+  query () {
+    this.paymentService.queryOrderStatus(this.order).subscribe((response) => {
+      const orderResp = JSON.parse(JSON.stringify(response)).data;
+      this.processStatus(orderResp.status);
+    });
+  }
+
+  completeOrder() {
+    // this.paymentService.completeOrder(this.order).subscribe((response) => {
+    //   this.router.navigate(['checkout']);
+    // });
+    this.router.navigate(['checkout']);
+  }
+
+  processStatus (status: string) {
+    if ( status === 'SUCCESS' ) {
+      this.completeOrder();
+    } else if (status === 'NOTPAY' || status === 'USERPAYING') {
+      this.order.queryTimes ++;
+      if (this.order.queryTimes < 5) {
+        setTimeout(this.query(), 3000);
+      } else {
+
+      }
+    } else {
+
     }
   }
 

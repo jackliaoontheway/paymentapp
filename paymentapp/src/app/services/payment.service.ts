@@ -31,4 +31,8 @@ export class PaymentService {
     return this.http.post(this.productBaseUrl + '/queryorderstatus', order);
   }
 
+  completeOrder(order: NooneOrder) {
+    return this.http.post(this.productBaseUrl + '/completeorder', order);
+  }
+
 }
