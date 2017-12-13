@@ -2,8 +2,11 @@
     <div class="auth-code-div-forhidden" >
         <form class="example-form">
             <mat-form-field class="example-full-width">
-                <input matInput type="password" (ngModelChange)="onValueChange($event)" autofocus="autofocus" #authCodeInput  [(ngModel)]="authCode"name="authCode">
+                <input matInput  (ngModelChange)="onValueChange($event)" autofocus="autofocus" #authCodeInput name="authCode">
             </mat-form-field>
         </form>
+        <audio autoplay="autoplay" *ngIf="play3">
+            <source src="assets/mp3/3.mp3" type="audio/mpeg">
+          </audio>
     </div>
 </div>

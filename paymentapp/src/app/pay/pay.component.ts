@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import { NooneOrder } from '../model/NooneOrder';
 import { Observable } from 'rxjs/Observable';
@@ -10,16 +10,19 @@ import { PaymentService } from '../services/payment.service';
   templateUrl: './pay.component.html',
   styleUrls: ['./pay.component.css']
 })
-export class PayComponent implements OnInit {
+export class PayComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private route: ActivatedRoute, private paymentService: PaymentService) { }
 
   order: NooneOrder = new NooneOrder();
 
+  play3: boolean;
+
   @ViewChild('authCodeInput') input;
 
   ngOnInit() {
     console.log('on init...');
+    this.play3 = true;
     this.input.nativeElement.value = '';
     this.input.nativeElement.focus();
 
@@ -31,6 +34,10 @@ export class PayComponent implements OnInit {
       console.log('query params : ' + id);
       this.order.id = id;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.play3 = false;
   }
 
   payDivOnClick() {
@@ -78,7 +85,7 @@ export class PayComponent implements OnInit {
 
       }
     } else {
-
+      this.router.navigate(['home']);
     }
   }
 

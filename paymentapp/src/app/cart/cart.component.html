@@ -1,5 +1,11 @@
 <div class="cart-head-div">
     <img src="assets/images/head.png" class="cart-head-img"/>
+    <audio autoplay="autoplay" *ngIf="play1">
+      <source src="assets/mp3/1.mp3" type="audio/mpeg">
+    </audio>
+    <audio autoplay="autoplay" *ngIf="play2">
+      <source src="assets/mp3/2.mp3" type="audio/mpeg">
+    </audio>
 </div>
 <div class="example-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource">

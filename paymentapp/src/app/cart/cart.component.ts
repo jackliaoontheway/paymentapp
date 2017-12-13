@@ -24,6 +24,8 @@ export class CartComponent implements OnInit , OnDestroy {
   dataSource = new MatTableDataSource<OrderItem>();
   totalFee: number;
 
+  play1: boolean;
+  play2: boolean;
 
   listenRFID() {
     console.log('CartComponent read rfid...');
@@ -42,6 +44,11 @@ export class CartComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
+    this.play1 = true;
+
+    setTimeout(() => {
+      this.play2 = true;
+    }, 6000);
 
     this.orderItemList = null;
     this.totalFee = 0;
@@ -64,6 +71,8 @@ export class CartComponent implements OnInit , OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.play1 = false;
+    this.play2 = false;
     clearInterval(this.interval);
   }
 
