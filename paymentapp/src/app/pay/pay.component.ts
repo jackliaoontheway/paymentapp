@@ -77,15 +77,15 @@ export class PayComponent implements OnInit, OnDestroy {
   processStatus (status: string) {
     if ( status === 'SUCCESS' ) {
       this.completeOrder();
-    } else if (status === 'NOTPAY' || status === 'USERPAYING') {
+    } else if (status === 'USERPAYING') {
       this.order.queryTimes ++;
       if (this.order.queryTimes < 5) {
-        setTimeout(this.query(), 3000);
+        setTimeout(this.query(), 6000);
       } else {
 
       }
     } else {
-      this.router.navigate(['home']);
+      this.router.navigate(['']);
     }
   }
 
