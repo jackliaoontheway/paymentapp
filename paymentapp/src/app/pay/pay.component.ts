@@ -61,6 +61,12 @@ export class PayComponent implements OnInit, OnDestroy {
   }
 
   query () {
+    console.log('query count : ' + this.order.queryTimes);
+    this.order.queryTimes ++;
+    if ( this.order.queryTimes === 7) {
+      this.router.navigate(['']);
+      return;
+    }
     this.paymentService.queryOrderStatus(this.order).subscribe((response) => {
       const orderResp = JSON.parse(JSON.stringify(response)).data;
       this.processStatus(orderResp.status);
@@ -68,22 +74,17 @@ export class PayComponent implements OnInit, OnDestroy {
   }
 
   completeOrder() {
-    // this.paymentService.completeOrder(this.order).subscribe((response) => {
-    //   this.router.navigate(['checkout']);
-    // });
     this.router.navigate(['checkout']);
   }
 
   processStatus (status: string) {
+    console.log('process status : ' + status);
     if ( status === 'SUCCESS' ) {
       this.completeOrder();
     } else if (status === 'USERPAYING') {
-      this.order.queryTimes ++;
-      if (this.order.queryTimes < 5) {
-        setTimeout(this.query(), 6000);
-      } else {
-
-      }
+      setTimeout( () => {
+        this.query();
+      }, 5000);
     } else {
       this.router.navigate(['']);
     }
