@@ -6,7 +6,7 @@ import { OrderItem } from '../model/OrderItem';
 @Injectable()
 export class PaymentService {
 
-  private productBaseUrl = 'http://localhost:8080/paymentms/';
+  private productBaseUrl = 'http://192.168.5.9:8080/paymentms/';
 
   constructor(private http: HttpClient) {
 
