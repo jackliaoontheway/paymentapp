@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  paymentMSurl : '192.168.5.9'
 };

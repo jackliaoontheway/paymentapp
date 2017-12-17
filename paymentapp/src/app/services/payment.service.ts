@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NooneOrder } from '../model/NooneOrder';
 import { OrderItem } from '../model/OrderItem';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PaymentService {
 
-  private productBaseUrl = 'http://192.168.5.9:8080/paymentms/';
+  private paymentUrl = environment.paymentMSurl;
+  private productBaseUrl = 'http://' + this.paymentUrl + '/paymentms/';
 
   constructor(private http: HttpClient) {
 

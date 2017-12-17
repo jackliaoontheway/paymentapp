@@ -63,7 +63,7 @@ export class PayComponent implements OnInit, OnDestroy {
   query () {
     console.log('query count : ' + this.order.queryTimes);
     this.order.queryTimes ++;
-    if ( this.order.queryTimes === 7) {
+    if ( this.order.queryTimes >= 6) {
       this.router.navigate(['']);
       return;
     }
