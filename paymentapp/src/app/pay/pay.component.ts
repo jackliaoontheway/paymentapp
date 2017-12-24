@@ -19,6 +19,7 @@ export class PayComponent implements OnInit, OnDestroy {
   play3: boolean;
 
   interval = null;
+  timeTask = null;
 
   @ViewChild('authCodeInput') input;
 
@@ -46,12 +47,18 @@ export class PayComponent implements OnInit, OnDestroy {
       console.log('query params : ' + id);
       this.order.id = id;
       this.interval = setInterval( () => { this.listenRFID(); }, 3000);
+
+      this.timeTask = setTimeout(() => {
+        this.router.navigate(['']);
+      }, 30000);
+
     });
   }
 
   ngOnDestroy(): void {
     this.play3 = false;
     clearInterval(this.interval);
+    clearTimeout(this.timeTask);
   }
 
   payDivOnClick() {
@@ -62,6 +69,7 @@ export class PayComponent implements OnInit, OnDestroy {
     console.log(authCode);
     if (authCode.length === 18) {
       clearInterval(this.interval);
+      clearTimeout(this.timeTask);
       this.order.payCode = authCode;
       this.pay();
     }

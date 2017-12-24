@@ -66,8 +66,7 @@ export class CartComponent implements OnInit , OnDestroy {
       this.totalFee = JSON.parse(serverResponse).totalFee;
       this.dataSource.data = this.orderItemList;
 
-      this.interval = setInterval( () => { this.listenRFID(); }, 3000);
-
+      this.interval = setInterval(() => { this.listenRFID(); }, 3000);
     });
   }
 
