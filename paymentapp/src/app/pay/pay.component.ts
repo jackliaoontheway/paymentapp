@@ -18,7 +18,19 @@ export class PayComponent implements OnInit, OnDestroy {
 
   play3: boolean;
 
+  interval = null;
+
   @ViewChild('authCodeInput') input;
+
+  listenRFID() {
+    console.log('CartComponent read rfid...');
+    this.paymentService.readRFID().subscribe((response) => {
+      const hasData = JSON.parse(JSON.stringify(response)).hasData;
+      if ( !hasData ) {
+        this.router.navigate(['']);
+      }
+    });
+  }
 
   ngOnInit() {
     console.log('on init...');
@@ -33,11 +45,13 @@ export class PayComponent implements OnInit, OnDestroy {
       const id = combined[0].get('id');
       console.log('query params : ' + id);
       this.order.id = id;
+      this.interval = setInterval( () => { this.listenRFID(); }, 3000);
     });
   }
 
   ngOnDestroy(): void {
     this.play3 = false;
+    clearInterval(this.interval);
   }
 
   payDivOnClick() {
@@ -47,6 +61,7 @@ export class PayComponent implements OnInit, OnDestroy {
   onValueChange(authCode) {
     console.log(authCode);
     if (authCode.length === 18) {
+      clearInterval(this.interval);
       this.order.payCode = authCode;
       this.pay();
     }
