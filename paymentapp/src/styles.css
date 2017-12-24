@@ -8,5 +8,5 @@ body{
     z-index: 0;
     overflow-x: hidden;
     overflow-y: hidden;
-    /* cursor: none; */
+    cursor: none;
 }
