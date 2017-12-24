@@ -39,6 +39,7 @@ export class CartComponent implements OnInit , OnDestroy {
         this.orderItemList = null;
         this.totalFee = 0;
         this.dataSource.data = null;
+        this.router.navigate(['']);
       }
     });
   }
