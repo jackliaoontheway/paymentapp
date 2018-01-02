@@ -46,7 +46,7 @@ export class PayComponent implements OnInit, OnDestroy {
       const id = combined[0].get('id');
       console.log('query params : ' + id);
       this.order.id = id;
-      this.interval = setInterval( () => { this.listenRFID(); }, 3000);
+      this.interval = setInterval( () => { this.listenRFID(); }, 4500);
 
       this.timeTask = setTimeout(() => {
         this.router.navigate(['']);
